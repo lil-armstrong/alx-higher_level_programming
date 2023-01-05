@@ -2,9 +2,8 @@
 import random
 number = random.randint(-10000, 10000)
 last_digit = abs(number) % 10
-negative = True if number < 0 else False
 
-if negative:
+if number < 0:
     last_digit = -last_digit
 
 print(f"Last digit of {number:d} is {last_digit:d} and is", end=" ")
