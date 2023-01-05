@@ -6,6 +6,7 @@ report = ""
 sym = '-' if number < 0 else ""
 last_digit = sym + last_digit
 
+print(last_digit)
 if int(last_digit == 0):
     report = "is 0"
 if int(last_digit) < 6:
