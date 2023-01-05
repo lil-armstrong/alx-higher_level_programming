@@ -5,7 +5,7 @@
  * @h: pointer to head of list
  * Return: number of nodes
  */
-size_t print_listint(const listint_t *h)
+size_t print_listint(listint_t *h)
 {
 	const listint_t *current;
 	unsigned int n; /* number of nodes */
