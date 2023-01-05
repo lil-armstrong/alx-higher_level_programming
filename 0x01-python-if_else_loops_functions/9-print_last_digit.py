@@ -2,7 +2,7 @@
 
 def print_last_digit(number):
     """Print the last digit of a number."""
-    if type(number) == type(1):
+    if isinstance(number, int):
         print(str(number)[-1], end="")
     else:
         raise TypeError("NaN")
