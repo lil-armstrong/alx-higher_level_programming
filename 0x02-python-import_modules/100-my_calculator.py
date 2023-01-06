@@ -12,19 +12,9 @@ if __name__ == "__main__":
         rh = int(av[2])
         res = 0
 
-        if (opr in ["+", '-', '*', '/']):
-            match(opr):
-                case '+':
-                    res = add(lh, rh)
-                case '-':
-                    res = sub(lh, rh)
-                case '*':
-                    res = add(lh, rh)
-                case '/':
-                    res = div(lh, rh)
-                case _:
-                    pass
-            print("{} {} {} = {}".format(lh, opr, rh, res))
+        ops = {'+': add, '-': sub, '*': mul, '/': div}
+        if (opr in ops.keys()):
+            print("{} {} {} = {}".format(lh, opr, rh, ops[opr](lh, rh)))
             exit(0)
         print("Unknown operator. Available operators: +, -, * and /")
         exit(1)
