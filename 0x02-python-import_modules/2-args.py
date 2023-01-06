@@ -6,8 +6,7 @@ if __name__ == "__main__":
 
     index = 1  # index counter
     av = sys.argv[1:]  # argument list
-    ac = 0  # argument count
-    ac = len(av)
+    ac = len(av)  # argument count
     str = [("arguments" if ac > 1 else "argument"),
            ":"] if ac > 0 else ["arguments", "."]
 
