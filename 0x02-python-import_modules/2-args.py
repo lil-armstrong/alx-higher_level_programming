@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-"""Print the number of arguments."""
 
 if __name__ == "__main__":
+    """Print the number of arguments."""
     import sys
 
     index = 1  # index counter
@@ -9,9 +9,9 @@ if __name__ == "__main__":
     ac = 0  # argument count
     ac = len(av)
     str = [("arguments" if ac > 1 else "argument"),
-           ":"] if ac > 0 else ["argument", "."]
+           ":"] if ac > 0 else ["arguments", "."]
 
-    print("{} {}".format(ac, "".join(str)))
+    print("{:d} {}".format(ac, "".join(str)))
 
     for arg in av:
         print("{}: {}".format(index, arg))
