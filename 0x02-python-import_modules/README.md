@@ -28,7 +28,7 @@
 3. Write a program that prints the number of and the list of its arguments.
 
     The output should be:
-        Number of argument(s) followed by argument (if number is one) or arguments (otherwise), followed by
+        Number of argument(s) followed by `argument` (if number is one) or `arguments` (otherwise), followed by
         `:` (or `.` if no arguments were passed) followed by
         a new line, followed by (if at least one argument),
         one line per argument:
