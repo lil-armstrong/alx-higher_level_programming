@@ -10,13 +10,12 @@ def safe_print_division(a, b):
     Returns
         result pf division or None
     """
-    result = None
 
     try:
         result = a/b
     except (TypeError, ZeroDivisionError):
         result = None
     finally:
-        print("Inside result:{}".format(result))
+        print("Inside result: {}".format(result))
 
     return result
