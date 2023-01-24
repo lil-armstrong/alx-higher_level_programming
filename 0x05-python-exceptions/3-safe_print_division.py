@@ -1,12 +1,20 @@
 #!/usr/bin/python3
 
 def safe_print_division(a, b):
-    """Divide two integers and print the result."""
+    """Divide two integers and print the result.
+
+    Args
+        a: The first integer.
+        b: The second integer.
+
+    Returns
+        result pf division or None
+    """
     result = None
 
     try:
         result = a/b
-    except Exception:
+    except (TypeError, ZeroDivisionError):
         result = None
     finally:
         print("Inside result:{}".format(result))
