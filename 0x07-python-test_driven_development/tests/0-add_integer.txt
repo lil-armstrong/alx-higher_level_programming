@@ -1,0 +1,52 @@
+The ``add_integer`` module
+========================
+
+
+Using ``add_integer``:
+----------------------
+
+>>> add_integer = __import__('0-add_integer').add_integer
+
+Add two integers
+>>> add_integer(2, 5)
+7
+
+Raise an exception if arg ``a`` is not an integer or float
+>>> add_integer("a", 10)
+Traceback (most recent call last):
+..
+TypeError: a must be a integer
+
+Raise an exception if arg ``b`` is not an integer or float
+>>> add_integer(10, "b")
+Traceback (most recent call last):
+...
+TypeError: b must be a integer
+
+Cast to integer before computing result for ``a``
+>>> add_integer(2.5, 5)
+7
+
+Cast to integer before computing result for ``b``
+>>> add_integer(5, 2.5)
+7
+
+``b`` is an optional argument. It has a default of 98
+>>> add_integer(2)
+100
+
+Compute negative values for both ``a``
+>>> add_integer(-2, 10)
+8
+
+Compute negative values for both ``b``
+>>> add_integer(10, -2)
+8
+
+Compute negative values for both ``a`` and ``b``
+>>> add_integer(-2, -10)
+-12
+
+Computes exponential values
+>>> add_integer(1e100)
+10000000000000000159028911097599180468360808563945281389781327557747838772170381060813469985856815202
