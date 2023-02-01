@@ -1,6 +1,6 @@
 The ``print_square`` module
 =============================
-A function that prints ``My name is <first name> <last name>``
+A function that prints a square using the character #, given a size (integer value)
 
 Using ``print_square``:
 -------------------------
