@@ -1,0 +1,35 @@
+The ``say_my_name`` module
+=============================
+A function that prints ``My name is <first name> <last name>``
+
+Using ``say_my_name``:
+-------------------------
+>>> say_my_name = __import__('3-say_my_name').say_my_name
+
+1. ``first_name`` and ``last_name`` must be strings otherwise, raise a TypeError exception with the message ``first_name must be a string or last_name must be a string``
+>>> say_my_name(2)
+Traceback (most recent call last):
+..
+TypeError: first_name must be a string
+
+2. ``last_name`` must be a string otherwise, raise a TypeError exception with the message ``last_name must be a string``
+>>> say_my_name("John", 2)
+Traceback (most recent call last):
+..
+TypeError: last_name must be a string
+
+3. Passing ``first_name`` and ``last_name`` prints ``My name is <first name> <last name>``
+>>> say_my_name("John", "Doe")
+My name is John Doe
+
+4. Omitting ``last_name`` uses an empty string for ``last_name``
+>>> say_my_name("Peter") # doctest: +DONT_ACCEPT_BLANKLINE, +NORMALIZE_WHITESPACE
+My name is Peter 
+
+5. ``first_name`` is a required argument and must be a string
+>>> say_my_name()
+Traceback (most recent call last):
+..
+TypeError: say_my_name() missing 1 required positional argument: 'first_name'
+
+
