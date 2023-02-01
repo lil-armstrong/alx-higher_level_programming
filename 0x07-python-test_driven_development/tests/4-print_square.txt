@@ -1,0 +1,32 @@
+The ``print_square`` module
+=============================
+A function that prints ``My name is <first name> <last name>``
+
+Using ``print_square``:
+-------------------------
+>>> print_square = __import__('4-print_square').print_square
+
+1. size must be an integer, otherwise raise a TypeError exception with the message ``size must be an integer``
+>>> print_square('a')
+Traceback (most recent call last):
+..
+TypeError: size must be an integer
+
+2. if size is less than 0, raise a ValueError exception with the message `size must be >= 0`
+>>> print_square(-1)
+Traceback (most recent call last):
+..
+TypeError: size must be >= 0
+
+3. if size is a float and is less than 0, raise a TypeError exception with the message ``size must be an integer``
+>>> print_square(-0.5)
+Traceback (most recent call last):
+..
+TypeError: size must be an integer
+
+4. Given size, an integer value. Print a square using the # character
+>>> print_square(4)
+####
+####
+####
+####
