@@ -1,6 +1,12 @@
 # 0x06 - Python classes
 
-## Task
+-   [Object Oriented programming](https://intranet.alxswe.com/rltoken/M-MFweENpRdEfRto_Gzlvg)
+-   [Class and instance Attributes](https://intranet.alxswe.com/rltoken/SGQIevRxW6lTgr4jGDzXbw)
+-   [classmethods and staticmethods](https://intranet.alxswe.com/rltoken/Ij1EnTg02gtIknOkNv4xGA)
+-   [Getters vs Setters](https://intranet.alxswe.com/rltoken/xjpk-jUNe0uGEzcNXbwIHQ)
+-   [str vs repr](https://intranet.alxswe.com/rltoken/iu1ILT-t6FMuZvk7vRvfuQ)
+
+## Tasks
 
 Write a class `Square` that defines a square by: (based on `5-square.py`)
 
