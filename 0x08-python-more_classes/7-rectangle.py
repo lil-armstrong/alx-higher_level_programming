@@ -56,12 +56,14 @@ class Rectangle:
 
     def __str__(self):
         """Return `string` representation of rectangle"""
-        result = ""
+        if (self.width == 0 or self.height == 0):
+            return ""
+        str = ""
         for h in range(self.height):
             for w in range(self.width):
-                result += str(self.print_symbol)
-            result += "\n" if (h < self.height - 1) else ""
-        return result
+                str += "#"
+            str += "\n" if (h < self.height - 1) else ""
+        return str
 
     def __repr__(self):
         """Return a eval compliant string representation of instance."""
