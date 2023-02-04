@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""Divide all elements of a matrix by a divisor"""
+
 
 def matrix_divided(matrix, div):
     """Divide all elements of a matrix.
@@ -7,6 +9,11 @@ def matrix_divided(matrix, div):
     matrix: list of lists of integers or floats
     div: divisor
 
+    Raises:
+    ZeroDivisionError: if the value of div is zero
+    TypeError: if matrix is not a list of lists of integers/floats
+    TypeError: if each row of the matrix are not the same size
+    TypeError: if ``div`` is not a number
     """
     if (not isinstance(matrix, list)):
         raise TypeError(
