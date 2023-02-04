@@ -16,7 +16,7 @@ TypeError: size must be an integer
 >>> print_square(-1)
 Traceback (most recent call last):
 ..
-TypeError: size must be >= 0
+ValueError: size must be >= 0
 
 3. if size is a float and is less than 0, raise a TypeError exception with the message ``size must be an integer``
 >>> print_square(-0.5)
