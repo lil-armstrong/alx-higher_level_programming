@@ -2,51 +2,97 @@ The ``add_integer`` module
 ========================
 
 
-Using ``add_integer``:
+Usage:
 ----------------------
+``add_integer(...)``` returns the addition of its two arguments. For numbers,
+that value is equivalent to using the ``+`` operator.
 
 >>> add_integer = __import__('0-add_integer').add_integer
 
-1. Add two integers
+Add two integers
+------------------
 >>> add_integer(2, 5)
 7
 
-2. Raise an exception if arg ``a`` is not an integer or float
->>> add_integer("a", 10)
-Traceback (most recent call last):
-..
-TypeError: a must be a integer
+Floats are casted to ints before addition is performed
+--------------------------------------------------------
+>>> add_integer(2.5, 3.5)
+5
 
-3. Raise an exception if arg ``b`` is not an integer or float
->>> add_integer(10, "b")
-Traceback (most recent call last):
-...
-TypeError: b must be a integer
+>>> add_integer(-2.5, 2)
+0
 
-4. Cast to integer before computing result for ``a``
->>> add_integer(2.5, 5)
-7
-
-5. Cast to integer before computing result for ``b``
->>> add_integer(5, 2.5)
-7
-
-6. ``b`` is an optional argument. It has a default of 98
+The second argument is optional. It has a default of 98
+---------------------------------------------------------
 >>> add_integer(2)
 100
 
-7. Compute negative values for both ``a``
+TypeError
++++++++++
+
+Raise an exception if arg ``a`` is not an integer or float
+-------------------------------------------------------------
+>>> add_integer("a", 10)
+Traceback (most recent call last):
+..
+TypeError: a must be an integer
+
+>>> add_integer(None)
+Traceback (most recent call last):
+..
+TypeError: a must be an integer
+
+Raise an exception if arg ``b`` is not an integer or float
+-----------------------------------
+>>> add_integer(10, "b")
+Traceback (most recent call last):
+...
+TypeError: b must be an integer
+
+>>> add_integer(10, None)
+Traceback (most recent call last):
+...
+TypeError: b must be an integer
+
+
+Compute negative values for both ``a``
+------------------------------------
 >>> add_integer(-2, 10)
 8
 
-8. Compute negative values for both ``b``
+Compute negative values for both ``b``
+------------------------------------
 >>> add_integer(10, -2)
 8
 
 9. Compute negative values for both ``a`` and ``b``
+------------------------------------
 >>> add_integer(-2, -10)
 -12
 
-10. Computes exponential values
+Computes exponential values
+------------------------------------
 >>> add_integer(1e100)
 10000000000000000159028911097599180468360808563945281389781327557747838772170381060813469985856815202
+
+Fails if infinite arguments are passed
+------------------------------------
+>>> add_integer(float('inf'))
+Traceback (most recent call last):
+OverflowError: cannot convert float infinity to integer
+
+>>> add_integer(10, float('inf'))
+Traceback (most recent call last):
+OverflowError: cannot convert float infinity to integer
+
+Fails if NaN arguments are passed
+---------------------------------
+>>> add_integer(float('nan'))
+Traceback (most recent call last):
+..
+ValueError: cannot convert float NaN to integer
+
+>>> add_integer(10, float('nan'))
+Traceback (most recent call last):
+..
+ValueError: cannot convert float NaN to integer
