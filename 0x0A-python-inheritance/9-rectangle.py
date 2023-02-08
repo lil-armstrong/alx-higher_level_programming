@@ -5,28 +5,24 @@ BaseGeometry = __import__('7-base_geometry').BaseGeometry
 
 
 class Rectangle(BaseGeometry):
-    """Represent a rectange"""
+    """Represent a rectange using BaseGeometry"""
 
     def __init__(self, width, height):
-        """Initialize rectangle.
+        """Initialize a new rectangle instance.
 
         Args:
-        width: width of rectangle
-        height: height of rectangle
+        width (int): width of rectangle
+        height (int): height of rectangle
         """
         self.integer_validator("width", width)
-        self.integer_validator("height", height)
         self.__width = width
+        self.integer_validator("height", height)
         self.__height = height
 
     def area(self):
         """Calculate area of rectangle"""
         return (self.__width * self.__height)
 
-    def print(self):
-        """Print"""
-        print(self)
-
     def __str__(self):
         """Return rectangle description"""
-        return "[Rectangle] {}/{}".format(self.__width, self.__height)
+        return "[{}] {}/{}".format(self.__class__.__name__, self.__width, self.__height)
