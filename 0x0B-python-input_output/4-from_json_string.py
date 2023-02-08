@@ -10,6 +10,6 @@ def from_json_string(my_str):
     my_str: json string containing Python object
 
     Returns:
-                Python object
+    Python object
     """
     return (json.loads(my_str))
