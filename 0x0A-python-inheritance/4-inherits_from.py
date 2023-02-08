@@ -8,8 +8,8 @@ def inherits_from(obj, a_class):
     a specified class.
 
     Args:
-    obj: Object instance to check
-    a_class: specified class
+    obj (any): Object instance to check
+    a_class (type): The class to match the type of obj to.
 
     Returns:
     True: if object is an instance
