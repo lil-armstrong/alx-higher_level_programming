@@ -1,0 +1,42 @@
+baseGeometry module
+===================
+Represents a Geometric shape object
+
+Usage
+======
+>>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+
+
+Raises an exception with the message ``area() is not implemented``
+>>> g = BaseGeometry()
+>>> g.area()
+Traceback (most recent call last):
+..
+Exception: area() is not implemented
+
+Has a public instance method ``integer_validator`` that validates values:
+------------------------------------------------
+If value is less or equal to 0
+Raise a TypeError exception with the message: 
+``<name> must be an integer``
+------------------------------------------------
+>>> g = BaseGeometry()
+>>> g.integer_validator("width", "hello")
+Traceback (most recent call last):
+..
+TypeError: width must be an integer
+
+------------------------------------------------
+if ``value`` is less or equal to 0: 
+Raise a ``ValueError`` exception with the message 
+<name> must be greater than 0
+------------------------------------------------
+>>> g = BaseGeometry()
+>>> g.integer_validator("width", 0)
+Traceback (most recent call last):
+..
+ValueError: width must be greater than 0
+>>> g.integer_validator("width", -2)
+Traceback (most recent call last):
+..
+ValueError: width must be greater than 0

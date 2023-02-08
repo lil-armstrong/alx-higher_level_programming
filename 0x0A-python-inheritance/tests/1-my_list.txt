@@ -1,0 +1,28 @@
+MyList module
+=============
+Inherits from the list class
+Has a method that sorts and prints list 
+
+Usage
++++++
+
+>>> MyList = __import__('1-my_list').MyList
+>>> alist = MyList()
+
+------------------------------------
+Is a list instance
+------------------------------------
+>>> isinstance(alist, (list))
+True
+
+------------------------------------
+Returns the sorted list
+------------------------------------
+>>> alist.append(4)
+>>> alist.append(2)
+>>> alist.append(1)
+>>> alist.append(3)
+>>> alist.append(6)
+>>> alist.append(5)
+>>> alist.print_sorted()
+[1, 2, 3, 4, 5, 6]
