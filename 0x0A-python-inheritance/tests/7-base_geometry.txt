@@ -7,6 +7,31 @@ Usage
 >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
 
 
+------------------------------------
+Checking for module docstring:
+------------------------------------
+>>> m = __import__("7-base_geometry").__doc__
+>>> len(m) > 1
+True
+
+
+------------------------------------
+Checking for class docstring:
+------------------------------------
+>>> c = BaseGeometry.__doc__
+>>> len(c) > 1
+True
+
+------------------------------------
+Checking for method docstring:
+------------------------------------
+>>> mod = BaseGeometry.area.__doc__
+>>> len(mod) > 1
+True
+>>> mod = BaseGeometry.integer_validator.__doc__
+>>> len(mod) > 1
+True
+
 Raises an exception with the message ``area() is not implemented``
 >>> g = BaseGeometry()
 >>> g.area()
