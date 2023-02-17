@@ -11,6 +11,10 @@ from models.square import Square
 class TestBase_initialization (unittest.TestCase):
     """Unittest for testing Base class initialization"""
 
+    def has_docs(self):
+        """Everything is documented in models.base"""
+        self.assertTrue(len(Base.__doc__) > 10)
+
     def test_id(self):
         """Check that given the ID, the next instance increases from the value
         of that ID"""
