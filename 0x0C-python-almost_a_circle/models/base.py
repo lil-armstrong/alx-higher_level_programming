@@ -21,15 +21,15 @@ class Base:
         # self.__uid.append(id)
 
     @staticmethod
-    def to_json_string(list_dictionaries):
+    def to_json_string(dict_list):
         """Get the JSON string representaion of list_dictionaries
 
         Args:
-        list_dictionaries: dictionary
+        list_dictionaries: list of dictionary
         """
-        if list_dictionaries is None or len(list_dictionaries) == 0:
+        if dict_list is None or len(dict_list) == 0:
             return "[]"
-        return json.dumps(list_dictionaries)
+        return json.dumps(dict_list)
 
     @staticmethod
     def from_json_string(json_string):
@@ -58,7 +58,7 @@ class Base:
             return new
 
     @classmethod
-    def save_to_file(cls, list_objs=None):
+    def save_to_file(cls, obj_list=None):
         """Write the JSON string representaion to a file
 
         Args:
@@ -66,13 +66,14 @@ class Base:
         """
         file = "{}.json".format(cls.__name__)
         with open(file, "w") as fp:
-            if (list_objs is None) or (len(list_objs) == 0):
+            if (obj_list is None) or (len(obj_list) == 0):
                 fp.write("[]")
             else:
-                for obj in list_objs:
-                    if (isinstance(obj, Base)):
-                        obj_dict = Base.to_json_string(obj.to_dictionary())
-                        fp.write(obj_dict)
+                obj_dict_list = Base.to_json_string(
+                    [obj.to_dictionary() for obj in obj_list if (
+                        isinstance(obj, (cls)) and "to_dictionary" in cls.__dict__)]
+                )
+                fp.write(obj_dict_list)
 
     @classmethod
     def load_from_file(cls):
