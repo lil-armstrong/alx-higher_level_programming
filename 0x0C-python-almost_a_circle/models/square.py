@@ -30,7 +30,7 @@ class Square(Rectangle):
                                               self.id,
                                               self.x,
                                               self.y,
-                                              self.height))
+                                              self.size))
 
     def update(self, *args, **kwargs):
         """Assign an argument to each ttribute"""
@@ -64,4 +64,3 @@ class Square(Rectangle):
             "x": self.x,
             "y": self.y,
         }
-
