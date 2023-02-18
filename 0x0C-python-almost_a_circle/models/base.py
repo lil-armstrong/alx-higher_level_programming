@@ -6,6 +6,7 @@ import json
 class Base:
     """Represent the base of other classes in this project."""
     __nb_objects = 0
+    # __uid = []
 
     def __init__(self, id=None):
         """Manage id attribute to avoid duplication"""
@@ -13,7 +14,11 @@ class Base:
         if not (id is None):
             self.id = id
         else:
-            self.id = self.__nb_objects
+            self.id = Base.__nb_objects
+        # while (self.id in self.__uid):
+        #     self.id += 1
+
+        # self.__uid.append(id)
 
     @staticmethod
     def to_json_string(list_dictionaries):
