@@ -106,8 +106,7 @@ class TestBaseSaveToFile(unittest.TestCase):
         Rectangle.save_to_file([ilist])
         with open("Rectangle.json", "r") as f:
             data = Rectangle.from_json_string(f.read())
-            self.assertEqual(len(data), 1)
-            self.assertDictEqual(data[0], ilist.to_dictionary())
+            self.assertDictEqual(data, ilist.to_dictionary())
 
     def test_save_to_file_two_rectangles(self):
         r1 = Rectangle(10, 7, 2, 8, 5)
@@ -154,12 +153,10 @@ class TestBaseSaveToFile(unittest.TestCase):
         Square.save_to_file([s])
         s = Square(10, 7, 2, 8)
         Square.save_to_file([s])
-        list = [s.to_dictionary()]
 
         with open("Square.json", "r") as f:
             r = Square.from_json_string(f.read())
-            self.assertEqual(len(r), 1)
-            self.assertDictEqual(list[0], r[0])
+            self.assertDictEqual(s.to_dictionary(), r)
 
     def test_save_to_file_None(self):
         Square.save_to_file(None)
