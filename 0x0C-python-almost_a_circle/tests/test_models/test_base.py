@@ -94,6 +94,27 @@ class TestBaseSaveToFile(unittest.TestCase):
             if os.path.exists(file_path):
                 os.remove(file_path)
 
+    def test_file_path(self):
+        """ Create a new file or overwrite existing """
+        list_objs = None
+        file_path = "Base.json"
+        Base.save_to_file(list_objs)
+        self.assertTrue(os.path.exists(file_path))
+        if os.path.exists(file_path):
+            os.remove(file_path)
+
+        file_path = "Rectangle.json"
+        Rectangle.save_to_file(list_objs)
+        self.assertTrue(os.path.exists(file_path))
+        if os.path.exists(file_path):
+            os.remove(file_path)
+
+        file_path = "Square.json"
+        Square.save_to_file(list_objs)
+        self.assertTrue(os.path.exists(file_path))
+        if os.path.exists(file_path):
+            os.remove(file_path)
+
     def test_create_new_file(self):
         """ Create a new file or overwrite existing """
         list_objs = None
@@ -109,68 +130,95 @@ class TestBaseSaveToFile(unittest.TestCase):
         with open(file_path, "r") as f:
             self.assertEqual(expected_list, json.load(f))
 
-    def test_save_to_file_one_rectangle(self):
+    def test_load_from_filel(self):
+        """ Load object instances from json file """
         file_path = "Rectangle.json"
-        r = Rectangle(10, 7, 2, 8, 5)
-        Rectangle.save_to_file([r])
+        expected = [Rectangle(10, 7, 2, 8, 5)]
 
-        with open(file_path, "r") as f:
-            data = Rectangle.from_json_string(f.read())
-            self.assertDictEqual(data, r.to_dictionary())
+        Rectangle.save_to_file(expected)
+        from_file = Rectangle.load_from_file()
+        self.assertIsInstance(from_file, list)
+        self.assertTrue(
+            all([
+                isinstance(item, (Rectangle, Base))
+                for item in from_file
+            ])
+        )
 
-    def test_save_to_file_two_rectangles(self):
-        r1 = Rectangle(10, 7, 2, 8, 5)
-        r2 = Rectangle(2, 4, 1, 2, 3)
-        obj_list = [r1, r2]
-        dict = Rectangle.to_json_string(
-            [obj.to_dictionary() for obj in obj_list])
-        Rectangle.save_to_file([r1, r2])
-        with open("Rectangle.json", "r") as f:
-            r = (f.read())
-            # dict is an array, whereas the json data is not
-            # Make up for the following chars ('[',']', ',', ' ')
-            self.assertEqual(len(dict), len(r) + 4)
+    def test_save_single_rectangle(self):
+        file_path = "Rectangle.json"
+        expected = [Rectangle(10, 7, 2, 8, 5)]
 
-    def test_save_to_file_one_square(self):
+        Rectangle.save_to_file(expected)
+        from_file = Rectangle.load_from_file()
+        self.assertEqual(len(expected), len(from_file))
+        for index, res in enumerate(expected):
+            self.assertEqual(res.to_dictionary(),
+                             from_file[index].to_dictionary())
+
+    def test_save_multiple_rectangles(self):
+        file_path = "Rectangle.json"
+        expected = [
+            Rectangle(10, 7, 2, 8, 5),
+            Rectangle(8, 1, 2, 3)
+        ]
+
+        Rectangle.save_to_file(expected)
+        from_file = Rectangle.load_from_file()
+        for index, res in enumerate(expected):
+            self.assertEqual(res.to_dictionary(),
+                             from_file[index].to_dictionary())
+
+    def test_save_square(self):
+        file_path = "Square.json"
         s = Square(10, 7, 2, 8)
-        dict = s.to_json_string(s.to_dictionary())
-        Square.save_to_file([s])
-        with open("Square.json", "r") as f:
-            self.assertEqual(len(dict), len(f.read()))
+        expected = [s]
 
-    def test_save_to_file_two_squares(self):
-        s1 = Square(10, 7, 2, 8)
-        s2 = Square(8, 1, 2, 3)
-        obj_list = [s1, s2]
-        dict = Square.to_json_string([obj.to_dictionary() for obj in obj_list])
-        Square.save_to_file(obj_list)
-        with open("Square.json", "r") as f:
-            r = (f.read())
-            # dict is an array, whereas the json data is not
-            # Make up for the following chars ('[',']', ',', ' ')
-            self.assertEqual(len(r) + 4, len(dict))
+        Square.save_to_file(expected)
+        from_file = Square.load_from_file()
+        for index, res in enumerate(expected):
+            self.assertEqual(res.to_dictionary(),
+                             from_file[index].to_dictionary())
+
+        # =============MULTIPLE=================
+        expected = [Square(10, 7, 2, 8), Square(8, 1, 2, 3)]
+
+        Square.save_to_file(expected)
+        with open(file_path, "r") as f:
+            from_file = json.load(f)
+            self.assertEqual(len(from_file), len(expected))
+            for index, res in enumerate(expected):
+                self.assertEqual(res.to_dictionary(), from_file[index])
 
     def test_save_to_file_cls_name_for_filename(self):
-        s = Square(10, 7, 2, 8)
-        s.save_to_file([s])
-        dict = s.to_json_string(s.to_dictionary())
-        with open("Square.json", "r") as f:
-            r = f.read()
-            self.assertEqual(len(dict), len(r))
+        file_path = "Square.json"
+        expected = [Square(10, 7, 2, 8)]
+
+        Square.save_to_file(expected)
+        with open(file_path, "r") as f:
+            from_file = json.load(f)
+            self.assertEqual(len(expected), len(from_file))
+            for index, res in enumerate(expected):
+                self.assertEqual(res.to_dictionary(), from_file[index])
 
     def test_save_to_file_overwrite(self):
+        file_path = "Square.json"
         s = Square(9, 2, 39, 2)
         Square.save_to_file([s])
         s = Square(10, 7, 2, 8)
-        Square.save_to_file([s])
+        expected = [s]
 
-        with open("Square.json", "r") as f:
-            r = Square.from_json_string(f.read())
-            self.assertDictEqual(s.to_dictionary(), r)
+        Square.save_to_file(expected)
+        with open(file_path, "r") as f:
+            from_file = json.load(f)
+            self.assertEqual(len(expected), len(from_file))
+            for index, res in enumerate(expected):
+                self.assertEqual(res.to_dictionary(), from_file[index])
 
     def test_save_to_file_None(self):
+        file_path = "Square.json"
         Square.save_to_file(None)
-        with open("Square.json", "r") as f:
+        with open(file_path, "r") as f:
             self.assertEqual("[]", f.read())
 
     def test_save_to_file_empty_list(self):

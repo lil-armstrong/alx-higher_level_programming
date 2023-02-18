@@ -58,19 +58,19 @@ class Base:
             return new
 
     @classmethod
-    def save_to_file(cls, obj_list=None):
+    def save_to_file(cls, dict_list=None):
         """Write the JSON string representaion to a file
 
         Args:
-        list_objs: List of instances that inherit fro Base
+        list_objs: List of dictionary 
         """
         file = "{}.json".format(cls.__name__)
         with open(file, "w") as fp:
-            if (obj_list is None) or (len(obj_list) == 0):
+            if (dict_list is None):
                 fp.write("[]")
             else:
                 obj_dict_list = Base.to_json_string(
-                    [obj.to_dictionary() for obj in obj_list if (
+                    [obj.to_dictionary() for obj in dict_list if (
                         isinstance(obj, (cls)) and "to_dictionary" in cls.__dict__)]
                 )
                 fp.write(obj_dict_list)
@@ -78,10 +78,11 @@ class Base:
     @classmethod
     def load_from_file(cls):
         """Return a list of instancs"""
-        file = "{}.json".format(cls.__class__.__name__)
+        file = "{}.json".format(cls.__name__)
         try:
             with open(file, 'r') as fp:
-                dict_list = cls.from_json_string(fp.read())
-                return [cls.create(**d) for dict in dict_list]
+                from_file = json.load(fp)
+                dict_list = from_file
+                return [cls.create(**d) for d in dict_list]
         except IOError:
             return []
