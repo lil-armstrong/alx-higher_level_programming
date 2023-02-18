@@ -14,7 +14,6 @@ class TestRectangleInit(unittest.TestCase):
 
     def test_has_docs(self):
         """Everything is documented in models.rectangle"""
-        print("\nRectangle.__doc__")
         self.assertTrue(len(Rectangle.__doc__) > 10)
 
     def test_call_super_with_id(self):
