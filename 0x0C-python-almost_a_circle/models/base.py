@@ -64,15 +64,14 @@ class Base:
         Args:
         list_objs: List of instances that inherit fro Base
         """
-        for obj in list_objs:
-            if (isinstance(obj, Base)):
-                file = "{}.json".format(obj.__class__.__name__)
-                obj_dict = Base.to_json_string(obj.to_dictionary())
-
-                with open(file, "w") as fp:
-                    if (list_objs is None):
-                        fp.write("[]")
-                    else:
+        file = "{}.json".format(cls.__name__)
+        with open(file, "w") as fp:
+            if (list_objs is None):
+                fp.write("[]")
+            else:
+                for obj in list_objs:
+                    if (isinstance(obj, Base)):
+                        obj_dict = Base.to_json_string(obj.to_dictionary())
                         fp.write(obj_dict)
 
     @classmethod

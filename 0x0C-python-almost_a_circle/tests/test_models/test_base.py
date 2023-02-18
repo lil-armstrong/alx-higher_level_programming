@@ -60,7 +60,7 @@ class TestBaseToJSONString(unittest.TestCase):
     def test_has_method(self):
         """Base has a public method called to_json_stringS"""
         self.assertIn("to_json_string", Base.__dict__)
-        
+
     def test_to_json_string_rectangle_type(self):
         r = Rectangle(10, 7, 2, 8, 6)
         self.assertEqual(str, type(Base.to_json_string([r.to_dictionary()])))
@@ -68,3 +68,91 @@ class TestBaseToJSONString(unittest.TestCase):
     def test_to_json_string_square_type(self):
         sq = Square(10, 2, 8, 6)
         self.assertEqual(str, type(Base.to_json_string([sq.to_dictionary()])))
+
+    def test_to_json_string_empty_list(self):
+        self.assertEqual("[]", Base.to_json_string([]))
+
+    def test_to_json_string_none(self):
+        self.assertEqual("[]", Base.to_json_string(None))
+
+
+class TestBaseSaveToFile(unittest.TestCase):
+    """Unittest for Base.save_to_file"""
+
+    def test_has_method(self):
+        """Base has a public method called save_to_file"""
+        self.assertIn("save_to_file", Base.__dict__)
+
+    @classmethod
+    def tearDown(self):
+        """Delete any created files."""
+        try:
+            os.remove("Rectangle.json")
+        except IOError:
+            pass
+        try:
+            os.remove("Square.json")
+        except IOError:
+            pass
+        try:
+            os.remove("Base.json")
+        except IOError:
+            pass
+
+    def test_save_to_file_one_rectangle(self):
+        r = Rectangle(10, 7, 2, 8, 5)
+        Rectangle.save_to_file([r])
+        with open("Rectangle.json", "r") as f:
+            self.assertTrue(len(f.read()) == 53)
+
+    def test_save_to_file_two_rectangles(self):
+        r1 = Rectangle(10, 7, 2, 8, 5)
+        r2 = Rectangle(2, 4, 1, 2, 3)
+        Rectangle.save_to_file([r1, r2])
+        with open("Rectangle.json", "r") as f:
+            self.assertTrue(len(f.read()) == 105)
+
+    def test_save_to_file_one_square(self):
+        s = Square(10, 7, 2, 8)
+        Square.save_to_file([s])
+        with open("Square.json", "r") as f:
+            self.assertTrue(len(f.read()) == 39)
+
+    def test_save_to_file_two_squares(self):
+        s1 = Square(10, 7, 2, 8)
+        s2 = Square(8, 1, 2, 3)
+        Square.save_to_file([s1, s2])
+        with open("Square.json", "r") as f:
+            self.assertTrue(len(f.read()) == 77)
+
+    def test_save_to_file_cls_name_for_filename(self):
+        s = Square(10, 7, 2, 8)
+        Base.save_to_file([s])
+        with open("Base.json", "r") as f:
+            self.assertTrue(len(f.read()) == 39)
+
+    def test_save_to_file_overwrite(self):
+        s = Square(9, 2, 39, 2)
+        Square.save_to_file([s])
+        s = Square(10, 7, 2, 8)
+        Square.save_to_file([s])
+        with open("Square.json", "r") as f:
+            self.assertTrue(len(f.read()) == 39)
+
+    def test_save_to_file_None(self):
+        Square.save_to_file(None)
+        with open("Square.json", "r") as f:
+            self.assertEqual("[]", f.read())
+
+    def test_save_to_file_empty_list(self):
+        Square.save_to_file([])
+        with open("Square.json", "r") as f:
+            self.assertEqual("[]", f.read())
+
+    def test_save_to_file_no_args(self):
+        with self.assertRaises(TypeError):
+            Rectangle.save_to_file()
+
+    def test_save_to_file_more_than_one_arg(self):
+        with self.assertRaises(TypeError):
+            Square.save_to_file([], 1)

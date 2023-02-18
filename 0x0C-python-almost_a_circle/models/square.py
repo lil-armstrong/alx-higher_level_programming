@@ -40,18 +40,16 @@ class Square(Rectangle):
                     self.id = arg
                 if (id == 1):
                     self.size = arg
-                if (id == 3):
+                if (id == 2):
                     self.x = arg
-                if (id == 4):
+                if (id == 3):
                     self.y = arg
         else:
             for key, value in kwargs.items():
                 if (key == 'id'):
                     self.id = value
-                if (key == 'width'):
-                    self.width = value
-                if (key == 'height'):
-                    self.height = value
+                if (key == 'size'):
+                    self.size = value
                 if (key == 'x'):
                     self.x = value
                 if (key == 'y'):
@@ -66,3 +64,4 @@ class Square(Rectangle):
             "x": self.x,
             "y": self.y,
         }
+
