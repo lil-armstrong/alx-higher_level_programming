@@ -87,26 +87,36 @@ class TestBaseSaveToFile(unittest.TestCase):
     @classmethod
     def tearDown(self):
         """Delete any created files."""
-        try:
-            os.remove("Rectangle.json")
-        except IOError:
-            pass
-        try:
-            os.remove("Square.json")
-        except IOError:
-            pass
-        try:
-            os.remove("Base.json")
-        except IOError:
-            pass
+        file_paths = ["Rectangle.json",
+                      "Square.json",
+                      "Base.json"]
+        for file_path in file_paths:
+            if os.path.exists(file_path):
+                os.remove(file_path)
+
+    def test_create_new_file(self):
+        """ Create a new file or overwrite existing """
+        list_objs = None
+        file_path = "Rectangle.json"
+        Rectangle.save_to_file(list_objs)
+        self.assertTrue(os.path.exists(file_path))
+
+    def test_parse_file(self):
+        list_objs = None
+        expected_list = []
+        file_path = "Rectangle.json"
+        Rectangle.save_to_file(list_objs)
+        with open(file_path, "r") as f:
+            self.assertEqual(expected_list, json.load(f))
 
     def test_save_to_file_one_rectangle(self):
+        file_path = "Rectangle.json"
         r = Rectangle(10, 7, 2, 8, 5)
-        ilist = r  # instance list
-        Rectangle.save_to_file([ilist])
-        with open("Rectangle.json", "r") as f:
+        Rectangle.save_to_file([r])
+
+        with open(file_path, "r") as f:
             data = Rectangle.from_json_string(f.read())
-            self.assertDictEqual(data, ilist.to_dictionary())
+            self.assertDictEqual(data, r.to_dictionary())
 
     def test_save_to_file_two_rectangles(self):
         r1 = Rectangle(10, 7, 2, 8, 5)
