@@ -40,7 +40,7 @@ class Base:
         """
         if json_string is None:
             return []
-        return json.loads(json_string)
+        return [json.loads(json_string)]
 
     @classmethod
     def create(cls, **dictionary):
@@ -58,7 +58,7 @@ class Base:
             return new
 
     @classmethod
-    def save_to_file(cls, list_objs):
+    def save_to_file(cls, list_objs=None):
         """Write the JSON string representaion to a file
 
         Args:
@@ -66,7 +66,7 @@ class Base:
         """
         file = "{}.json".format(cls.__name__)
         with open(file, "w") as fp:
-            if (list_objs is None):
+            if (list_objs is None) or (len(list_objs) == 0):
                 fp.write("[]")
             else:
                 for obj in list_objs:

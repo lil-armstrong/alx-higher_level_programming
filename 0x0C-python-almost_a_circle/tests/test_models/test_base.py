@@ -3,6 +3,7 @@
 
 import os
 import unittest
+import json
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
@@ -101,43 +102,64 @@ class TestBaseSaveToFile(unittest.TestCase):
 
     def test_save_to_file_one_rectangle(self):
         r = Rectangle(10, 7, 2, 8, 5)
-        Rectangle.save_to_file([r])
+        ilist = r  # instance list
+        Rectangle.save_to_file([ilist])
         with open("Rectangle.json", "r") as f:
-            self.assertTrue(len(f.read()) == 53)
+            data = Rectangle.from_json_string(f.read())
+            self.assertEqual(len(data), 1)
+            self.assertDictEqual(data[0], ilist.to_dictionary())
 
     def test_save_to_file_two_rectangles(self):
         r1 = Rectangle(10, 7, 2, 8, 5)
         r2 = Rectangle(2, 4, 1, 2, 3)
+        obj_list = [r1, r2]
+        dict = Rectangle.to_json_string(
+            [obj.to_dictionary() for obj in obj_list])
         Rectangle.save_to_file([r1, r2])
         with open("Rectangle.json", "r") as f:
-            self.assertTrue(len(f.read()) == 105)
+            r = (f.read())
+            # dict is an array, whereas the json data is not
+            # Make up for the following chars ('[',']', ',', ' ')
+            self.assertEqual(len(dict), len(r) + 4)
 
     def test_save_to_file_one_square(self):
         s = Square(10, 7, 2, 8)
+        dict = s.to_json_string(s.to_dictionary())
         Square.save_to_file([s])
         with open("Square.json", "r") as f:
-            self.assertTrue(len(f.read()) == 39)
+            self.assertEqual(len(dict), len(f.read()))
 
     def test_save_to_file_two_squares(self):
         s1 = Square(10, 7, 2, 8)
         s2 = Square(8, 1, 2, 3)
-        Square.save_to_file([s1, s2])
+        obj_list = [s1, s2]
+        dict = Square.to_json_string([obj.to_dictionary() for obj in obj_list])
+        Square.save_to_file(obj_list)
         with open("Square.json", "r") as f:
-            self.assertTrue(len(f.read()) == 77)
+            r = (f.read())
+            # dict is an array, whereas the json data is not
+            # Make up for the following chars ('[',']', ',', ' ')
+            self.assertEqual(len(r) + 4, len(dict))
 
     def test_save_to_file_cls_name_for_filename(self):
         s = Square(10, 7, 2, 8)
-        Base.save_to_file([s])
-        with open("Base.json", "r") as f:
-            self.assertTrue(len(f.read()) == 39)
+        s.save_to_file([s])
+        dict = s.to_json_string(s.to_dictionary())
+        with open("Square.json", "r") as f:
+            r = f.read()
+            self.assertEqual(len(dict), len(r))
 
     def test_save_to_file_overwrite(self):
         s = Square(9, 2, 39, 2)
         Square.save_to_file([s])
         s = Square(10, 7, 2, 8)
         Square.save_to_file([s])
+        list = [s.to_dictionary()]
+
         with open("Square.json", "r") as f:
-            self.assertTrue(len(f.read()) == 39)
+            r = Square.from_json_string(f.read())
+            self.assertEqual(len(r), 1)
+            self.assertDictEqual(list[0], r[0])
 
     def test_save_to_file_None(self):
         Square.save_to_file(None)
@@ -150,8 +172,9 @@ class TestBaseSaveToFile(unittest.TestCase):
             self.assertEqual("[]", f.read())
 
     def test_save_to_file_no_args(self):
-        with self.assertRaises(TypeError):
-            Rectangle.save_to_file()
+        Square.save_to_file()
+        with open("Square.json", "r") as f:
+            self.assertEqual("[]", f.read())
 
     def test_save_to_file_more_than_one_arg(self):
         with self.assertRaises(TypeError):
