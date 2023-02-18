@@ -4,6 +4,8 @@
 import os
 import unittest
 import json
+import random
+
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
@@ -63,11 +65,18 @@ class TestBaseToJSONString(unittest.TestCase):
         self.assertIn("to_json_string", Base.__dict__)
 
     def test_to_json_string_rectangle_type(self):
-        r = Rectangle(10, 7, 2, 8, 6)
+        r = Rectangle(random.randrange(1, 100, 2),
+                      random.randrange(1, 100, 2),
+                      random.randrange(1, 100, 2),
+                      random.randrange(1, 100, 2),
+                      random.randrange(1, 100, 2))
         self.assertEqual(str, type(Base.to_json_string([r.to_dictionary()])))
 
     def test_to_json_string_square_type(self):
-        sq = Square(10, 2, 8, 6)
+        sq = Square(random.randrange(1, 100, 2),
+                    random.randrange(1, 100, 2),
+                    random.randrange(1, 100, 2),
+                    random.randrange(1, 100, 2))
         self.assertEqual(str, type(Base.to_json_string([sq.to_dictionary()])))
 
     def test_to_json_string_empty_list(self):
