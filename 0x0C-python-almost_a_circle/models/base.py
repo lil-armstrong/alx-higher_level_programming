@@ -71,7 +71,8 @@ class Base:
             else:
                 obj_dict_list = Base.to_json_string(
                     [obj.to_dictionary() for obj in dict_list if (
-                        isinstance(obj, (cls)) and "to_dictionary" in cls.__dict__)]
+                        isinstance(obj, (cls))
+                        and "to_dictionary" in cls.__dict__)]
                 )
                 fp.write(obj_dict_list)
 
