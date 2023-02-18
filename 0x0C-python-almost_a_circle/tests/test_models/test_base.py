@@ -55,7 +55,7 @@ class TestBase_initialization (unittest.TestCase):
             Base(1, 2)
 
 
-class TestBase_to_json_string(unittest.TestCase):
+class TestBaseToJSONString(unittest.TestCase):
     """Unit test to Base.to_json_string"""
 
     def test_to_json_string_rectangle_type(self):
