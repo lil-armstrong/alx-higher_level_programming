@@ -8,12 +8,11 @@ from models.rectangle import Rectangle
 from models.square import Square
 
 
-class TestBase_initialization (unittest.TestCase):
+class TestBaseInit (unittest.TestCase):
     """Unittest for testing Base class initialization"""
 
     def test_has_docs(self):
         """Everything is documented in models.base"""
-        print("\nBase.__doc__")
         self.assertTrue(len(Base.__doc__) > 10)
 
     def test_id(self):
@@ -58,8 +57,11 @@ class TestBase_initialization (unittest.TestCase):
 class TestBaseToJSONString(unittest.TestCase):
     """Unit test to Base.to_json_string"""
 
+    def test_has_method(self):
+        """Base has a public method called to_json_stringS"""
+        self.assertIn("to_json_string", Base.__dict__)
+        
     def test_to_json_string_rectangle_type(self):
-        print("\nBase.to_json_string")
         r = Rectangle(10, 7, 2, 8, 6)
         self.assertEqual(str, type(Base.to_json_string([r.to_dictionary()])))
 

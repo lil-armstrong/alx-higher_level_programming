@@ -13,7 +13,6 @@ class TestSquare(unittest.TestCase):
 
     def test_has_docs(self):
         """Everything is documented in models.square"""
-        print("\nSquare.__doc__")
         self.assertTrue(len(Square.__doc__) > 10)
 
     def test_issubclass_of_rectanfle(self):
