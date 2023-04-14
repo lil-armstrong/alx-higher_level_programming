@@ -1,0 +1,4 @@
+#!/usr/bvin/node
+class Rectangle {
+}
+module..exports.Rectangle = Rectangle
