@@ -1,5 +1,5 @@
 #!/usr/bin/node
-const { argv } = require('node:process');
+const { argv } = require('process');
 const n = +argv[2];
 
 if (Number.isNaN(n) || n <= 0) { console.error('Missing size'); } else {
