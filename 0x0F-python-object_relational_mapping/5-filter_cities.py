@@ -23,11 +23,10 @@ if __name__ == '__main__':
                            charset="utf8")
     cur = conn.cursor()
 
-    query = str("SELECT cities.name as name, " +
+    query = str("SELECT cities.name as name " +
                 "FROM cities " +
                 "INNER JOIN states ON cities.state_id=states.id " +
-                "WHERE states.name=%s " +
-                "ORDER BY cities.id ASC;")
+                "WHERE states.name=%s")
     # print(query)
     cur.execute(query, (state, ))
 
