@@ -18,7 +18,7 @@ if __name__ == '__main__':
             sys.argv[0]))
 
     else:
-        [user, password, db, search] = args
+        [user, password, db, match] = args
 
         conn = MySQLdb.connect(host="localhost",
                                port=3306,
@@ -28,10 +28,9 @@ if __name__ == '__main__':
                                charset="utf8")
         cur = conn.cursor()
         query = str("SELECT * FROM states " +
-                    "WHERE name LIKE '{}' " +
-                    "ORDER BY id ASC").format(
-            search)
-        cur.execute(query)
+                    "WHERE name LIKE %s " +
+                    "ORDER BY id ASC")
+        cur.execute(query, (match,))
 
         query_rows = cur.fetchall()
         for row in query_rows:
