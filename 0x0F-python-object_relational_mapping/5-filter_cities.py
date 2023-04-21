@@ -31,10 +31,10 @@ if __name__ == '__main__':
                 "states.name as state " +
                 "FROM cities " +
                 "INNER JOIN states ON cities.state_id=states.id " +
-                "WHERE states.name LIKE '{}' " +
-                "ORDER BY cities.id ASC;").format(state)
+                "WHERE states.name LIKE %s " +
+                "ORDER BY cities.id ASC;")
     # print(query)
-    cur.execute(query)
+    cur.execute(query, (state, ))
 
     query_rows = cur.fetchall()
     tmp = list(row[0] for row in query_rows)
