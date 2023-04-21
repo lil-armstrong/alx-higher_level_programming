@@ -13,8 +13,8 @@ if __name__ == '__main__':
     if (len(args) != 4):
         print(str("Usage: {} <mysql username> " +
                   "<mysql password> " +
-                  "<database name> <state name>").format(
-            sys.argv[0]))
+                  "<database name> " +
+                  "<state name searched>").format(sys.argv[0]))
 
     else:
         [user, password, db, search] = args
@@ -27,7 +27,7 @@ if __name__ == '__main__':
                                charset="utf8")
         cur = conn.cursor()
         query = str("SELECT * FROM states " +
-                    "WHERE name LIKE '{}' " +
+                    "WHERE name LIKE BINARY '{}' " +
                     "ORDER BY id ASC").format(search)
         cur.execute(query)
 
