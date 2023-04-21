@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-"""Cities by states
+""" Cities by states
 
- lists all cities from the database hbtn_0e_4_usa
+list all cities from the database hbtn_0e_4_usa
 """
 
 if __name__ == '__main__':
