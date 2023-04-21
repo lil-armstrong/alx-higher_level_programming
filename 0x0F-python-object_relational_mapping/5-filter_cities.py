@@ -1,5 +1,9 @@
 #!/usr/bin/python3
+"""All cities by state
 
+Takes in the name of a state as an argument and lists all cities 
+of that state, using the database hbtn_0e_4_usa
+"""
 
 if __name__ == '__main__':
     import MySQLdb
@@ -9,7 +13,9 @@ if __name__ == '__main__':
 
     if (len(args) != 4):
         raise ValueError(
-            "Usage: {} <user> <password> <db> <state>".format(sys.argv[0]))
+            str("Usage: {} <user> " +
+                "<password> " +
+                "<db> <state>").format(sys.argv[0]))
 
     [user, password, db, state] = args
 

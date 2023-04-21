@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 
+"""SQL Injection
 
+displays all values in the states table of hbtn_0e_0_usa 
+where name matches the argument
+"""
 if __name__ == '__main__':
     import MySQLdb
     import sys
@@ -8,20 +12,30 @@ if __name__ == '__main__':
     args = sys.argv[1:]
 
     if (len(args) != 4):
-        raise ValueError("Missing arguments")
+        print(str("Usage: {} <mysql username> " +
+                  "<mysql password> " +
+                  "<database name> <state name>").format(
+            sys.argv[0]))
 
-    [user, password, db, search] = args
+    else:
+        [user, password, db, search] = args
 
-    conn = MySQLdb.connect(host="localhost", port=3306,
-                           user=user, password=password, db=db, charset="utf8")
-    cur = conn.cursor()
-    query = "SELECT * FROM states WHERE name LIKE '{}' ORDER BY id ASC".format(
-        search)
-    cur.execute(query)
+        conn = MySQLdb.connect(host="localhost",
+                               port=3306,
+                               user=user,
+                               password=password,
+                               db=db,
+                               charset="utf8")
+        cur = conn.cursor()
+        query = str("SELECT * FROM states " +
+                    "WHERE name LIKE '{}' " +
+                    "ORDER BY id ASC").format(
+            search)
+        cur.execute(query)
 
-    query_rows = cur.fetchall()
-    for row in query_rows:
-        print(row)
+        query_rows = cur.fetchall()
+        for row in query_rows:
+            print(row)
 
-    cur.close()
-    conn.close()
+        cur.close()
+        conn.close()

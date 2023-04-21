@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+"""list all states with a name starting with N (upper N) from hbtn_0e_0_usa"""
 
 if __name__ == '__main__':
     import MySQLdb
@@ -8,18 +8,28 @@ if __name__ == '__main__':
     args = sys.argv[1:]
 
     if (len(args) != 3):
-        raise ValueError("Missing arguments")
+        print(str("Usage: {} <mysql username> " +
+                  "<mysql password> " +
+                  "<database name>").format(
+            sys.argv[0]))
 
-    [user, password, db] = args
+    else:
+        [user, password, db] = args
 
-    conn = MySQLdb.connect(host="localhost", port=3306,
-                           user=user, password=password, db=db, charset="utf8")
-    cur = conn.cursor()
+        conn = MySQLdb.connect(host="localhost",
+                               port=3306,
+                               user=user,
+                               password=password,
+                               db=db,
+                               charset="utf8")
+        cur = conn.cursor()
 
-    cur.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
-    query_rows = cur.fetchall()
-    for row in query_rows:
-        print(row)
+        cur.execute(
+            str("SELECT * FROM states " +
+                "WHERE name LIKE 'N%' ORDER BY id ASC"))
+        query_rows = cur.fetchall()
+        for row in query_rows:
+            print(row)
 
-    cur.close()
-    conn.close()
+        cur.close()
+        conn.close()
