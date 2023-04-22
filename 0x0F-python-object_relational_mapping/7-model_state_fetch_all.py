@@ -12,4 +12,4 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
     session = Session()
     for state in session.query(State).order_by(State.id):
-        print("%d. %s" % (state.id, state.name))
+        print("%d: %s" % (state.id, state.name))
