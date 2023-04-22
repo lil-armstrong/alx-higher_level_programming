@@ -11,11 +11,10 @@ if __name__ == "__main__":
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
-    results = session.query(State).filter(
-        State.name == '{}'.format(sys.argv[4])).order_by(State.id)
+    state = session.query(State).filter(
+        State.name == '{}'.format(sys.argv[4])).first()
 
-    if (results is not None):
-        for state in results:
-            print("%d: %s" % (state.id, state.name))
+    if (state is not None):
+        print("%s" % (state.id))
     else:
         print("Not found")
