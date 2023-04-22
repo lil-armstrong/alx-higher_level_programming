@@ -16,7 +16,7 @@ class State(Base):
     id = Column(Integer, Sequence(name='state_id_seq'),
                 primary_key=True, autoincrement=True)
     name = Column(String(128), nullable=False)
-    cities = relationship("City", back_populates='state')
+    # cities = relationship("City", back_populates='state')
 
     def __repr__(self):
         """Nicely format State object"""
