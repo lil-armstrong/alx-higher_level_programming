@@ -22,4 +22,4 @@ if __name__ == "__main__":
             all():
         print("%s: %s" % (state.id, state.name))
         for city in state.cities:
-            print("\t%s: %s" % (city.id, city.name))
+            print("    %s: %s" % (city.id, city.name))
