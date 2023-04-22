@@ -16,6 +16,6 @@ if __name__ == "__main__":
 
     if (results is not None):
         for state in results:
-            print("%d. %s" % (state.id, state.name))
+            print("%d: %s" % (state.id, state.name))
     else:
         print("Not found")

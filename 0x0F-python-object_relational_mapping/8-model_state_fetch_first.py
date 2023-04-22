@@ -13,6 +13,6 @@ if __name__ == "__main__":
     session = Session()
     first_state = session.query(State).order_by(State.id).first()
     if first_state is not None:
-        print("%d. %s" % (first_state.id, first_state.name))
+        print("%d: %s" % (first_state.id, first_state.name))
     else:
         print("Nothing")
