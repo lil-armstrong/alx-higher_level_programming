@@ -9,7 +9,7 @@ import sys
 from relationship_state import Base, State
 from relationship_city import Base, City
 from sqlalchemy import (create_engine)
-from sqlalchemy.orm import (sessionmaker, relationship)
+from sqlalchemy.orm import (sessionmaker)
 
 if __name__ == "__main__":
     engine = create_engine('mysql+mysqldb://{}:{}@localhost:{}/{}'.format(
@@ -19,8 +19,8 @@ if __name__ == "__main__":
     session = Session()
 
     for state in session.query(State).\
-            order_by(State.id).\
-            all():
+            order_by(State.id):
         print("%s: %s" % (state.id, state.name))
         for city in state.cities:
-            print("    %s: %s" % (city.id, city.name))
+            print("    ", end="")
+            print("%s: %s" % (city.id, city.name))
