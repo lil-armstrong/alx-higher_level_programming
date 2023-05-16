@@ -16,7 +16,7 @@ if __name__ == "__main__":
     else:
         try:
             url = args[0]
-            r = requests.post(url)
+            r = requests.get(url)
             r.raise_for_status()
             print("%s" % (r.text))
         except requests.HTTPError as e:
