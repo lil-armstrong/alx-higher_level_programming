@@ -13,9 +13,9 @@ if __name__ == "__main__":
 
     if (len(args) < 1):
         print("Usage: %s <URL>" % (sys.argv[0]))
-
-    url = args[0]
-    with urllib.request.urlopen(url) as response:
-        html = response.read()
-        headers = response.headers
-        print("%s" % (headers.get("X-Request-Id", None)))
+    else:
+        url = args[0]
+        with urllib.request.urlopen(url) as response:
+            html = response.read()
+            headers = response.headers
+            print("%s" % (headers.get("X-Request-Id", None)))
