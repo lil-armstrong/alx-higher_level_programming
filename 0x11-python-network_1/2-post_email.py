@@ -16,10 +16,10 @@ if __name__ == "__main__":
     else:
         url = args[0]
         email = args[1]
-        values = {
+        payload = {
             "email": email
         }
-        data = urllib.parse.urlencode(values)
+        data = urllib.parse.urlencode(payload)
         data = data.encode('ascii')
         req = urllib.request.Request(url, data, method="POST")
 
