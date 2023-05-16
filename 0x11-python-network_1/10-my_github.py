@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 
 """
- Script takes your GitHub credentials (username and password) 
- and uses the GitHub API to display your id
+ Script takes your GitHub credentials \
+     (username and password) and uses the\
+         GitHub API to display your id
 """
 
 
