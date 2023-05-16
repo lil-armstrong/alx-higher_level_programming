@@ -69,3 +69,12 @@ Write a Python script that takes in a URL, sends a request to the URL and displa
     - You must use the `with` statement
 
 Please test your script in the sandbox provided, using the web server running on port 5000
+
+## 5. Response header value #1
+
+Write a Python script that takes in a URL, sends a request to the URL and displays the value of the variable X-Request-Id in the response header
+
+    - You must use the packages requests and sys
+    - You are not allow to import other packages than requests and sys
+    - The value of this variable is different for each request
+    - You don’t need to check script arguments (number and type)
