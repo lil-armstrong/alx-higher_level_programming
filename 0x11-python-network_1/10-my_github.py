@@ -28,6 +28,6 @@ if __name__ == '__main__':
             response = requests.get(url, headers=headers, auth=auth)
             data = response.json()
 
-            print(data.get("id", ""))
+            print(data.get("id", None))
         except ValueError as e:
             print(e)
