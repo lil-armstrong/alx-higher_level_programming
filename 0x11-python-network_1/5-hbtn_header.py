@@ -4,10 +4,15 @@
 """
 
 import requests
+import sys
 
 if __name__ == '__main__':
+    args = sys.argv[1:]
 
-    url = "https://alx-intranet.hbtn.io/status"
-    req = requests.get(url)
-    headers = req.headers
-    print("%s" % (headers.get("X-Request-Id", None)))
+    if len(args) < 1:
+        print("Usage: %s <URL>" % sys.argv[0])
+    else:
+        url = "https://alx-intranet.hbtn.io/status"
+        req = requests.get(url)
+        headers = req.headers
+        print("%s" % (headers.get("X-Request-Id", None)))
