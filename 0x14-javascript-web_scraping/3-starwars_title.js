@@ -8,6 +8,11 @@ req.get(endpoint, (err, response, body) => {
     console.error(err);
     return;
   }
+
+  if (response.statusCode != 200) {
+    console.error(`Error code ${response.statusCode}`);
+  }
+
   const obj = JSON.parse(body);
   console.log(obj?.title);
 });
