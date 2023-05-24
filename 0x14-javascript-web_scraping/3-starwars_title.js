@@ -9,10 +9,10 @@ req.get(endpoint, (err, response, body) => {
     return;
   }
 
-  if (response.statusCode != 200) {
-    console.error(`Error code ${response.statusCode}`);
+  if (response.statusCode === 200) {
+    const obj = JSON.parse(body);
+    console.log(obj?.title);
+    return;
   }
-
-  const obj = JSON.parse(body);
-  console.log(obj?.title);
+  console.error(`Error code ${response.statusCode}`);
 });
