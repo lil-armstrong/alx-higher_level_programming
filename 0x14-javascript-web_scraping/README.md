@@ -16,3 +16,19 @@ Write a script that writer a string to a file
 -   The second argument is the string to write
 -   The content of the file must be written in utf-8
 -   If an error occurred while writing, print the error object
+
+## 2. Status code
+
+Write a script that display the status code of a `GET` request.
+
+-   The first argument is the URL to request (`GET`)
+-   The status code must be printed like this: `code: <status code>`
+-   You must use the module `request`
+
+## 3. Star wars movie title
+
+Write a script that prints the title of Star Wars movie where the episosde number matchers a given integer.
+
+-   The first argument is the movie ID
+-   You must use the [Star wars API]() with the endpoint https://swapi-api.alx-tools.com/api/films/:id
+-   You must use the module `request`
