@@ -10,19 +10,19 @@ req.get(url, (err, response) => {
 	}
 	if (response.statusCode === 200) {
 		const obj = JSON.parse(response?.body);
-		const users_with_completed_tasks = {};
+		const completed = {};
 
 		obj.forEach((task) => {
 			if (task.completed) {
-				if (task.userId in users_with_completed_tasks) {
-					users_with_completed_tasks[task.userId]++;
+				if (task.userId in completed) {
+					completed[task.userId]++;
 				} else {
-					users_with_completed_tasks[task.userId] = 1;
+					completed[task.userId] = 1;
 				}
 			}
 		});
 
-		console.log(users_with_completed_tasks);
+		console.log(completed);
 		return;
 	}
 
