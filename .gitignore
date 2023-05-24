@@ -1,3 +1,4 @@
 *main.*
 __pycache__
 0x0B-python-input_output/test/*
+*.vscode*
